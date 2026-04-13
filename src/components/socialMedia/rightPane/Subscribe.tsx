@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { SidebarCard } from "./components/SidebarCard";
 
 export default function Subscribe() {
     return (

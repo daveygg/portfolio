@@ -15,7 +15,7 @@ const navSections: NavSectionProps[] = [
   { mainText: "Currently", subText: "Available for hire" },
 ];
 
-export default function Navbar({ play }: { play: boolean }) {
+export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 

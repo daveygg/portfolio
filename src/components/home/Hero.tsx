@@ -21,10 +21,9 @@ interface HeroProps {
 export default function Hero({ play }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const shrinkAnim = useRef<gsap.core.Tween | null>(null);
   const hasShrunk = useRef(false);
 
-  const { contextSafe } = useGSAP(() => {
+  useGSAP(() => {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
@@ -105,7 +104,7 @@ export default function Hero({ play }: HeroProps) {
   return (
     <section ref={containerRef} className="h-screen w-full overflow-hidden">
       <div className="flex flex-col h-screen justify-center items-center relative ">
-        <Navbar play={true} />
+        <Navbar />
         <div className="overflow-hidden w-2/5 h-2/5 rounded-md z-10">
           <div className="overflow-hidden rounded-md div-reveal w-full h-full">
             <video

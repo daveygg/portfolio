@@ -15,7 +15,7 @@ SocialMediaSidebar({ items = [], user, setActive }: SocialMediaSidebarProps) {
   return (
     <div className="ml-10 pb-6 flex flex-col h-full justify-between hover:cursor-pointer">
       <div>
-      {items.map((item, idx) => (
+      {items.map((item) => (
         <SocialMediaSidebarOption
           key={`${item.title}`}
           {...item}

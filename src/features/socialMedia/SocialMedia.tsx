@@ -1,5 +1,5 @@
 import FeedViewSelector from "@/components/socialMedia/feed/FeedViewSelector";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import XIcon from "@mui/icons-material/X";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -75,7 +75,7 @@ export default function SocialMedia() {
   const [activeId, setActiveId] = useState<FeedType>("for-you");
 
   // posts code
-  const { posts, isLoading, isError, error } = usePosts(activeId);
+  const { posts, isLoading, isError } = usePosts(activeId);
   const [addedPosts, setAddedPosts] = useState<PostType[]>([]);
 
   const combinedPosts = useMemo(() => {

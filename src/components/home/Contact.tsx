@@ -53,7 +53,7 @@ export default function Contact() {
         </div>
 
         <p className="text-lg max-w-2xl text-center opacity-80">
-          <strong>Quick disclaimer:</strong> This project has been released early
+          <strong>Quick disclaimer:</strong> This portfolio has been released early
           to meet the requirements of a job offer that I really like the look
           of. There's still bugs and a lot to be done. But if you like what you
           see please get in touch!

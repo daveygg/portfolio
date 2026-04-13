@@ -4,9 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
-import { useTheme } from "next-themes";
 import { vertexShader, fragmentShader } from "@/shaders/shaders";
-import { Socials } from "@/components/shared/Socials";
 import { hexToRgb } from "@/lib/hexToRgb";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -18,7 +16,6 @@ const CONFIG = {
 };
 
 export function ShaderSection() {
-  const { theme } = useTheme();
   const heroRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
@@ -31,7 +28,6 @@ export function ShaderSection() {
 
       const hero = heroRef.current;
       const canvas = canvasRef.current;
-      const heroContent = heroContentRef.current;
 
       // --- THREE.JS SETUP ---
       const scene = new THREE.Scene();

@@ -67,7 +67,7 @@ export default function About() {
       emoji: "❤️",
       text: (
         <>
-          I've been lucky enough to have been a developer for the last 3 years and counting. I love my job.
+          I've been lucky enough to have been a developer for the last 3 years and counting.
         </>
       ),
       shortText: <>Lucky</>,

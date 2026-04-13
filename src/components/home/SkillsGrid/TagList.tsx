@@ -5,7 +5,7 @@ interface TagProps {
   color?: string;
 }
 
-const Tag: FC<TagProps> = ({ label, color = "pastel-cream" }) => (
+const Tag: FC<TagProps> = ({ label }) => (
   <span className={`bg-black px-3 py-1 rounded-full text-white text-sm font-medium whitespace-nowrap`}>
     {label}
   </span>

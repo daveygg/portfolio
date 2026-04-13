@@ -5,7 +5,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function SearchBox() {
   const [searchTerm, setSearchTerm] = useState<string | undefined>();
-  const { posts, isLoading, isError, error } = usePosts("for-you", searchTerm);
+  const { posts, isLoading } = usePosts("for-you", searchTerm);
   const [isFocused, setIsFocused] = useState(false);
 
   const handleBlur = () => {

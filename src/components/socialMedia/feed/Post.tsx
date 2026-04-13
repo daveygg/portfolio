@@ -7,7 +7,6 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import PostActionButton from "./PostActionButton";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import type { PostType } from "@/types/PostType";
-import { BadgeCheckIcon } from "lucide-react"
 
 export default function Post({ avatarUrl, username, content, displayName, createdAt, comments, retweets, likes, views, imageUrl }: PostType) {
 

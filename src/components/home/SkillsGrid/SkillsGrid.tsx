@@ -3,19 +3,6 @@ import SkillCard, { type SkillCardProps } from "./SkillCard";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import LogosGrid from "./LogosGrid";
-
-  const logos = [
-    "dotnet-logo.svg",
-    "gsap-logo.svg",
-    "motion-logo.svg",
-    "react-logo.svg",
-    "tailwindcss-logo.svg",
-    "typescript-logo.svg",
-    "azure-logo.svg",
-    "tanstack-logo.svg",
-    "figma-logo.svg",
-    "docker-logo.svg",
-  ];
   
   const skills: SkillCardProps[] = [
     {

@@ -1,4 +1,3 @@
-import StickyBox from "react-sticky-box";
 import HappeningBox from "./happening/HappeningBox";
 import NewsBox from "./news/NewsBox";
 import SearchBox from "./SearchBox";
