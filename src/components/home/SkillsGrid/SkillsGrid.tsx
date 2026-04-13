@@ -67,7 +67,7 @@ import LogosGrid from "./LogosGrid";
         "Build and maintain cloud infrastructure using IAC pipelines. For consistent, bespoke configuration of infrastructure.",
       colorClass: "bg-pastel-blue",
       gridAreaClass: "col-start-2 col-end-3 row-start-2",
-      tags: ["Azure", "IAC", "Bicep"],
+      tags: ["Azure", "IAC", "Bicep", "Vercel"],
     },
     {
       title: "CI/CD",
