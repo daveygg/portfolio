@@ -3,7 +3,7 @@ import underConstructionImg from "@/assets/images/project-images/under-construct
 import CurveDividerLeft from "../shared/CurveDividerLeft";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectCard from "./ProjectCard";
 import arrowRightImg from "@/assets/images/icons/arrow-right.png";
@@ -44,10 +44,6 @@ export default function Projects() {
   const hasInteractedRef = useRef(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    activeIndexRef.current = activeIndex;
-  }, [activeIndex]);
 
   const { contextSafe } = useGSAP({ scope: cardContainerRef });
 
@@ -201,6 +197,7 @@ export default function Projects() {
       );
 
     setActiveIndex(index);
+    activeIndexRef.current = index;
 
     ScrollTrigger.getAll().forEach((st) => {
       if (st.vars.id?.startsWith("project-card-")) {
