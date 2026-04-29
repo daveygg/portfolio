@@ -36,19 +36,9 @@ export default function SocialMedia() {
     { Icon: XIcon, active: false, id: "x" },
     { title: "Home", Icon: HomeIcon, active: true, id: "home" },
     { title: "Explore", Icon: SearchIcon, active: false, id: "explore" },
-    {
-      title: "Notifications",
-      Icon: NotificationsNoneIcon,
-      active: false,
-      id: "notifications",
-    },
+    { title: "Notifications", Icon: NotificationsNoneIcon, active: false, id: "notifications"},
     { title: "Messages", Icon: MailOutlineIcon, active: false, id: "messages" },
-    {
-      title: "Bookmarks",
-      Icon: BookmarkBorderIcon,
-      active: false,
-      id: "bookmarks",
-    },
+    { title: "Bookmarks", Icon: BookmarkBorderIcon, active: false, id: "bookmarks",},
     { title: "Lists", Icon: ListAltIcon, active: false, id: "lists" },
     { title: "Profile", Icon: PermIdentityIcon, active: false, id: "profile" },
     { title: "More", Icon: MoreHorizIcon, active: false, id: "more" },
@@ -112,6 +102,7 @@ export default function SocialMedia() {
         className="flex flex-row container mx-auto min-h-screen relative px-4
           font-chirp-regular"
       >
+        {/* Sidebar */}
         <div className="w-[20%] sticky top-0 border-r border-border h-screen">
           <SocialMediaSidebar
             items={sidebarItems}
@@ -119,6 +110,7 @@ export default function SocialMedia() {
             setActive={handleSetActive}
           />
         </div>
+        {/* Main Feed Area */}
         <div className="w-[50%] border-r border-border">
           <FeedViewSelector
             tabs={tabs}
@@ -136,6 +128,7 @@ export default function SocialMedia() {
             <Posts posts={combinedPosts} />
           )}
         </div>
+        {/* Right Pane */}
         <StickyBox className="w-[30%] flex h-fit pl-2" offsetBottom={20}>
           <RightPane />
         </StickyBox>

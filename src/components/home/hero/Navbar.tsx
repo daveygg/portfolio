@@ -15,6 +15,24 @@ const navSections: NavSectionProps[] = [
   { mainText: "Currently", subText: "Available for hire" },
 ];
 
+const socialLinks = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/david-gilchrist-61b158301/",
+    icon: <img src={linkedInImg} alt="LinkedIn" className="lg:size-5 md:size-4 sm:size-4 size-3" />,
+  },
+  {
+    name: "Email",
+    href: "mailto:david.gilchrist@outlook.com",
+    icon: <SendHorizontal className="lg:size-5 md:size-4 sm:size-4 size-3 text-white" />,
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/daveygg",
+    icon: <img src={githubImg} alt="GitHub" className="lg:size-5 md:size-4 sm:size-4 size-3" />,
+  },
+];
+
 export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -48,38 +66,34 @@ export default function Navbar() {
   return (
     <div
       ref={containerRef}
-      className="w-full flex justify-between items-center absolute top-0 z-50 py-4 px-16"
+      className="w-full flex justify-between items-center absolute top-0 z-50 py-4 lg:px-16 md:px-8 sm:px-4 px-2"
     >
-      {/* 1. Nav Sections remain direct children to respect justify-between */}
+      {/* Nav Sections */}
       {navSections.map((sec, idx) => (
         <NavSection key={idx} {...sec} />
       ))}
 
-      {/* 2. The Button Unit - Treated as a single child by the parent flexbox */}
+      {/* The Button */}
       <div className="relative flex items-center justify-center">
         {/* Hidden Icons */}
-        <Button asChild size="icon" className="social-pop absolute opacity-0 z-0 rounded-full border-white/20 bg-slate-900">
-          <a href="https://www.linkedin.com/in/david-gilchrist-61b158301/" target="_blank" rel="noreferrer">
-            <img src={linkedInImg} alt="LinkedIn" className="w-5 h-5" />
-          </a>
-        </Button>
-
-        <Button asChild size="icon" className="social-pop absolute opacity-0 z-0 rounded-full border-white/20 bg-slate-900">
-          <a href="mailto:david.gilchrist@outlook.com">
-            <SendHorizontal className="w-5 h-5 text-white" />
-          </a>
-        </Button>
-
-        <Button asChild size="icon" className="social-pop absolute opacity-0 z-0 rounded-full border-white/20 bg-slate-900">
-          <a href="https://github.com/daveygg" target="_blank" rel="noreferrer">
-            <img src={githubImg} alt="GitHub" className="w-5 h-5" />
-          </a>
-        </Button>
+        {socialLinks.map((link) => (
+          <Button
+            key={link.name}
+            asChild
+            size="icon"
+            className="social-pop absolute opacity-0 z-0 rounded-full border-white/20 bg-slate-900"
+          >
+            <a href={link.href} target={link.href.startsWith('http') ? "_blank" : undefined} rel="noreferrer">
+              {link.icon}
+            </a>
+          </Button>
+        ))}
 
         {/* Main Button */}
         <Button
           onClick={toggleMenu}
-          className="relative z-10 rounded-full hover:cursor-pointer px-4 py-6 text-2xl"
+          size="sm"
+          className="reveal-button relative z-10 rounded-full hover:cursor-pointer lg:px-4 md:px-3 sm:px-2 px-1 lg:py-6 md:py-5 sm:py-4 py-3 lg:text-2xl md:text-xl sm:text-lg text-xs"
         >
           Get in touch
         </Button>

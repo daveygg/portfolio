@@ -2,12 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis, type LenisRef } from "lenis/react";
 import gsap from "gsap";
-import Hero from "@/components/home/Hero";
-import About from "@/components/home/About";
-import Skillset from "@/components/home/Skillset";
-import Projects from "@/components/home/Projects";
-import LoadingScreen from "@/components/home/LoadingScreen";
-import Contact from "@/components/home/Contact";
+import Hero from "@/components/home/hero/Hero";
+import About from "@/components/home/about/About";
+import Skillset from "@/components/home/skillset/Skillset";
+import Projects from "@/components/home/projects/Projects";
+import LoadingScreen from "@/components/home/hero/LoadingScreen";
+import Contact from "@/components/home/contact/Contact";
 
 const CONFIG = {
   counterDuration: 2,
@@ -55,20 +55,24 @@ export default function Home() {
   return (
     <>
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+
+      {/* Loading Content */}
       {isLoading && (
         <LoadingScreen 
           duration={CONFIG.counterDuration} 
           onComplete={handleLoadingComplete} 
         />
       )}
-      <main className="relative w-full flex flex-col">
-        {/* Main Content */}
+
+      {/* Main Content */}
+      <main className="relative w-full flex flex-col">        
         <Hero play={!isLoading} />
         <About />
         <Skillset />
         <Projects />
         <Contact />
       </main>
+      
     </>
   );
 }

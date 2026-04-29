@@ -1,6 +1,6 @@
 import socialMediaImg from "@/assets/images/project-images/x.png";
 import underConstructionImg from "@/assets/images/project-images/under-construction.jpg";
-import CurveDividerLeft from "./CurveDividerLeft";
+import CurveDividerLeft from "../shared/CurveDividerLeft";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
@@ -27,7 +27,7 @@ const projects = [
     image: underConstructionImg,
     suit: "hearts" as Suit,
     rank: "K",
-  },
+  }
 ];
 
 const CONFIG = {
@@ -42,28 +42,18 @@ export default function Projects() {
   const activeIndexRef = useRef<number | null>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
   const hasInteractedRef = useRef(false);
-
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log("isScrollAnimating changed to:", isScrollAnimating);
-  }, [isScrollAnimating]);
-
-  useEffect(() => {
     activeIndexRef.current = activeIndex;
-    console.log("active index changed to:", activeIndex);
   }, [activeIndex]);
 
   const { contextSafe } = useGSAP({ scope: cardContainerRef });
 
   const reEnableTriggers = contextSafe(() => {
-    console.log(
-      "Re-enable function called. Ref Index:",
-      activeIndexRef.current,
-    );
     if (activeIndexRef.current !== null) return;
-    console.log("Re-enabling ScrollTriggers for project cards");
+
     ScrollTrigger.getAll().forEach((st) => {
       if (st.vars.id?.startsWith("project-card-")) {
         st.enable();
@@ -73,15 +63,11 @@ export default function Projects() {
   });
 
   const closeActiveCard = contextSafe((indexToClose: number | null) => {
-    console.log(
-      "Attempting to close active card. Index to close:",
-      indexToClose,
-    );
     if (indexToClose === null) return;
-    const card = cardRefs.current[indexToClose];
-    if (!card) return; // Guard clause
 
-    // 1. Create the scoped selector for this specific card
+    const card = cardRefs.current[indexToClose];
+    if (!card) return;
+
     const q = gsap.utils.selector(card);
     const otherCards = gsap.utils
       .toArray<HTMLElement>(".card")
@@ -139,7 +125,7 @@ export default function Projects() {
     return tl;
   });
 
-  // contextSafe allows us to create animations outside the initial load
+  // contextSafe ensures cleanup
   const handleClick = contextSafe((event: React.MouseEvent, index: number) => {
     if (isScrollAnimating || isClickAnimating) return;
 
@@ -160,11 +146,9 @@ export default function Projects() {
       onStart: () => setActiveIndex(index),
       onComplete: () => {
         setIsClickAnimating(false);
-        console.log("Click animation complete.");
       },
     });
 
-    console.log("Card clicked. Index:", index, "Active Index:", activeIndex);
     if (activeIndex !== null && activeIndex !== index) {
       var closeTimeline = closeActiveCard(activeIndex);
       if (closeTimeline !== undefined) {
@@ -190,14 +174,14 @@ export default function Projects() {
     tl.to(
       otherCards,
       {
-        scale: 0.8, // Shrink background cards
+        scale: 0.8,
         opacity: 0.7,
         duration: 0.4,
         ease: "easeInOut",
       },
       0,
     )
-      .set(card, { zIndex: 100 }) // Move to front mid-animation
+      .set(card, { zIndex: 100 })
       .to(card, {
         xPercent: 0,
         yPercent: -10,
@@ -220,7 +204,7 @@ export default function Projects() {
 
     ScrollTrigger.getAll().forEach((st) => {
       if (st.vars.id?.startsWith("project-card-")) {
-        st.disable(false); // false keeps the current visual state
+        st.disable(false);
       }
     });
   });
@@ -298,15 +282,15 @@ export default function Projects() {
         />
       )}
       <div
-        className="absolute left-[25%] top-[33.33%] -translate-x-1/2
-          -translate-y-1/2 flex opacity-0"
+        className="absolute left-[8%] lg:left-[25%] top-[25%] md:top-[33.33%] -translate-x-1/2
+          -translate-y-1/2 flex opacity-0 flex-col md:flex-row"
         ref={indicatorRef}
       >
-        <p>Click Me</p>
+        <p className="text-xs lg:text-base">Click Me</p>
         <img
           src={arrowRightImg}
           alt="Arrow pointing right"
-          className="w-6 h-6 ml-2"
+          className="size-4 md:size-6 ml-2"
         />
       </div>
       <CurveDividerLeft
@@ -318,12 +302,12 @@ export default function Projects() {
         ref={cardContainerRef}
         className="flex gap-8 px-16 py-24 justify-center"
       >
-        <div className="grid grid-cols-1 grid-rows-1 w-1/4">
+        <div className="grid grid-cols-1 grid-rows-1 w-11/16 lg:w-1/4">
           {projects.map((project, index) => (
             <ProjectCard
               ref={(el) => {
                 cardRefs.current[index] = el;
-              }} // Capture refs
+              }}
               key={index}
               index={index}
               onClick={(e) => {

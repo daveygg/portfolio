@@ -11,6 +11,7 @@ export interface SkillCardProps {
   colorClass: string;
   gridAreaClass: string;
   containerClass?: string;
+  bigSkill?: boolean;
 }
 
 export default function SkillCard({
@@ -25,8 +26,8 @@ export default function SkillCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const baseContentRef = useRef<HTMLDivElement>(null);
   const ramblingRef = useRef<HTMLDivElement>(null);
-
-  // The Slide Transition
+  
+  // Slide Transition
   useGSAP(() => {
     const tl = gsap.timeline({
       defaults: { duration: 0.6, ease: "power2.inOut", delay: 0.05 }
@@ -49,12 +50,12 @@ export default function SkillCard({
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
       className={`${gridAreaClass} ${colorClass} relative overflow-hidden rounded-xl flex flex-col
-        text-left items-start w-full cursor-default border-2 border-black`}
+        text-left items-start w-full cursor-default border-2 border-black h-full`}
     >
-      {/* STATIONARY TITLE: This stays put */}
-      <h3 className={`font-bold text-2xl relative z-30 w-full px-4 pt-4 ${colorClass}`}>{title}</h3>
+      {/* TITLE */}
+      <h3 className={`font-bold text-sm md:text-lg lg:text-2xl relative z-30 w-full px-2 pt-2 md:px-4 md:pt-4 ${colorClass}`}>{title}</h3>
 
-      <div className="relative grow w-full">
+      <div className="relative grow w-full h-full">
         {/* BASE LAYER: Short Text and TagList */}
         <div 
           ref={baseContentRef}
@@ -69,9 +70,9 @@ export default function SkillCard({
         {/* RAMBLING LAYER: Appears centered in the space below title */}
         <div
           ref={ramblingRef}
-          className="absolute inset-0 flex items-start justify-center z-20 pointer-events-none px-4 w-full"
+          className="flex items-start justify-center z-20 pointer-events-none px-2 lg:px-4 w-full"
         >
-          <p className="text-sm md:text-base font-medium text-start w-full">
+          <p className="text-sm md:text-sm lg:text-lg font-medium text-start w-full">
             {ramblingDescription}
           </p>
         </div>

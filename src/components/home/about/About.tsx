@@ -1,9 +1,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import CurveDividerLeft from "./CurveDividerLeft";
+import CurveDividerLeft from "../shared/CurveDividerLeft";
+import AboutLine from "./AboutLine";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -115,17 +116,17 @@ export default function About() {
       <CurveDividerLeft title="About" fillColor="#58BB90" bgColor="#FFFFFF" />
 
       {/* Content */}
-      <div className="p-16 flex flex-col items-start relative">
-        <div className="flex flex-row w-full gap-4">
+      <div className="p-4 sm:p-8 md:p-12 lg:p-16 flex flex-col items-start relative -mt-1">
+        <div className="flex flex-row w-full gap-2 md:gap-3 lg:gap-4">
           <div
             className="grid grid-cols-1 divide-y-2 divide-black rounded-lg
-              border-2 border-black w-3/4 bg-white overflow-hidden"
+              border-2 border-black w-full sm:w-3/4 bg-white overflow-hidden"
           >
             {aboutTexts.map((text, index) => (
               <AboutLine key={index} {...text} />
             ))}
           </div>
-          <div className="flex justify-end items-center w-1/4">
+          <div className="flex justify-end items-center sm:w-1/4 w-0 invisible sm:visible">
             <img
               src="images/me/me.jpg"
               alt="David Gilchrist"
@@ -136,74 +137,5 @@ export default function About() {
         </div>
       </div>
     </section>
-  );
-}
-
-interface AboutLineProps {
-  emoji: string;
-  shortText: React.ReactNode;
-  text: React.ReactNode;
-}
-
-function AboutLine({ emoji, text, shortText }: AboutLineProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const scope = useRef<HTMLDivElement>(null);
-  const revealRef = useRef<HTMLDivElement>(null);
-
-  // 1. Initial State: Set the clip-path to a flat line in the center
-  useGSAP(
-    () => {
-      gsap.set(revealRef.current, {
-        clipPath: "polygon(0% 50%, 100% 50%, 100% 50%, 0% 50%)",
-      });
-    },
-    { scope },
-  );
-
-  // 2. Hover Animation: Expand/Collapse the clip-path
-  useGSAP(
-    () => {
-      gsap.to(revealRef.current, {
-        clipPath: isHovered
-          ? "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
-          : "polygon(0% 50%, 100% 50%, 100% 50%, 0% 50%)",
-        duration: 0.6,
-        ease: "expo2.InOut",
-        overwrite: "auto",
-        delay: 0.15
-      });
-    },
-    { dependencies: [isHovered], scope },
-  );
-
-  return (
-    <div
-      ref={scope}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      // Added h-full and removed overflow-hidden here, it goes inside
-      className="flex items-center p-4 relative cursor-default h-full"
-    >
-      {/* BASE LAYER: Large Short Text + Emoji */}
-      <div className="flex items-center w-full h-full justify-between">
-        <p
-          className="animate-sweep-text text-6xl font-bold text-muted-foreground
-            uppercase w-full"
-        >
-          {shortText}
-        </p>
-        <p className="text-4xl ml-4">{emoji}</p>
-      </div>
-
-      {/* REVEAL LAYER: Full Description */}
-      <div
-        ref={revealRef}
-        className="absolute -inset-[1px] bg-neutral-800 p-4 flex items-center
-          justify-between z-10 overflow-hidden"
-      >
-        <p className="text-lg w-full text-white font-medium">{text}</p>
-        <p className="text-4xl ml-4">{emoji}</p>
-      </div>
-    </div>
   );
 }

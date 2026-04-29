@@ -3,8 +3,15 @@ import SkillCard, { type SkillCardProps } from "./SkillCard";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import LogosGrid from "./LogosGrid";
-  
-  const skills: SkillCardProps[] = [
+import { useIsMobile } from "@/hooks/use-mobile";
+
+const getGridAreaClass = (isMobile: boolean, desktopClass: string, bigSkill: boolean = false) => {
+  if (isMobile && bigSkill) return "col-span-2";
+  if (isMobile) return "";
+  return desktopClass;
+};
+
+const skills: SkillCardProps[] = [
     {
       title: "API ⭐",
       shortDescription: "What I'm best at",
@@ -23,6 +30,7 @@ import LogosGrid from "./LogosGrid";
         "Identity",
         "AutoMapper",
       ],
+      bigSkill: true,
     },
     {
       title: "Front End",
@@ -45,6 +53,7 @@ import LogosGrid from "./LogosGrid";
         "Zod",
         "ZuStand",
       ],
+      bigSkill: true,
     },
     {
       title: "System Integrations",
@@ -107,7 +116,7 @@ import LogosGrid from "./LogosGrid";
   ];
 
 export default function SkillsGrid() {
-
+  const isMobile = useIsMobile();
   const logosRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -134,13 +143,19 @@ export default function SkillsGrid() {
 
   return (
     <div
-      className="grid grid-cols-[0.8fr_0.8fr_0.5fr_0.5fr]
-        grid-rows-[0.8fr_0.8fr_0.8fr_0.8fr] gap-2 w-full"
+      className="grid grid-cols-2 grid-rows-5 gap-2 w-full md:grid-cols-[0.8fr_0.8fr_0.5fr_0.5fr]
+        md:grid-rows-[0.8fr_0.9fr_0.8fr_0.5fr]"
     >
       {skills.map((skill, index) => (
-        <SkillCard key={index} {...skill} />
+        <SkillCard
+          key={index}
+          {...skill}
+          gridAreaClass={getGridAreaClass(isMobile, skill.gridAreaClass, skill.bigSkill)}
+        />
       ))}
-      <LogosGrid />
+      <div className={!isMobile ? "col-span-4 row-start-4" : ""}>
+        <LogosGrid />
+      </div>
     </div>
   );
 }

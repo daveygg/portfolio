@@ -11,11 +11,11 @@ export default function CurveDividerLeft({
 }: CurveDividerLeftProps) {
   return (
     <div
-      className="relative w-full h-20 z-10"
+      className="relative w-full h-10 lg:h-20 md:h-15 z-10 -mt-1"
       style={{ backgroundColor: bgColor }}
     >
       <svg
-        className="absolute top-0 w-full h-full"
+        className="absolute top-0 w-full h-[102%]"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         fill="none"
@@ -23,7 +23,7 @@ export default function CurveDividerLeft({
       >
         {/* The Fill Area */}
         <path        
-          d="M0,2 H20 C30,2 30,98 40,98 H100 V100 H0 Z"
+          d="M0,2 H20 C30,2 30,98 40,98 H100 V102 H0 Z"
           fill={fillColor}
         />
         {/* The Black Stroke Line */}
@@ -35,8 +35,8 @@ export default function CurveDividerLeft({
         />
       </svg>
       <h1
-        className="text-xl font-semibold tracking-wider uppercase z-10
-          relative px-20 h-full flex items-center right-0"
+        className="text-md sm:text-xl font-semibold tracking-wider uppercase z-10
+          relative px-4 sm:px-8 md:px-10 lg:px-20 h-full flex items-center right-0"
       >
         {title}
       </h1>

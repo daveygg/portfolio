@@ -1,7 +1,7 @@
-import CurveDividerRight from "./CurveDividerRight";
+import CurveDividerRight from "../shared/CurveDividerRight";
 import linkedInImg from "@/assets/images/logos/InBug-White.png";
 import githubImg from "@/assets/icons/GitHub_Invertocat_White.svg";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { SendHorizonal } from "lucide-react";
 
 const CONTACT_LINKS = [
@@ -29,12 +29,13 @@ export default function Contact() {
   return (
     <>
       <CurveDividerRight bgColor="#9DD5D8" fillColor="white" title="contact" />
-      <div className="flex flex-col w-full items-center p-16 gap-6">
-        <h1 className="text-4xl font-bold">I'd love to hear from you!</h1>
+      <div className="flex flex-col w-full items-center p-8 md:p-16 gap-6">
+        <h1 className="text-4xl font-bold text-center">I'd love to hear from you!</h1>
 
         <div className="flex gap-4">
           {CONTACT_LINKS.map((link) => (
             <Button
+              size="sm"
               key={link.label}
               asChild
               className="px-8 py-4 rounded-full"

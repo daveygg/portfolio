@@ -40,7 +40,7 @@ export default function LoadingScreen({ duration, onComplete }: LoadingProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-white"
     >
       <span className="text-xl font-bold tabular-nums text-muted-foreground">
         {count}
